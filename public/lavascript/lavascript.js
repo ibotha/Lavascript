@@ -34,11 +34,11 @@ export function Lavascript(width, height, fps, parent, game) {
     }
 
     this.main_loop = async () => {
-        this.t1 = await Date.now()
+        this.t1 = await new Date().getTime()
         await this.process_input()
         await this.update()
         await this.render()
-        this.t2 = await Date.now()
+        this.t2 = await new Date().getTime()
         if (!this.pressed[27]) {
             window.setTimeout((this.main_loop), Math.max(2, this.mspf - (this.t2 - this.t1)))
         } else {
@@ -60,26 +60,25 @@ export function Lavascript(width, height, fps, parent, game) {
         this.context.beginPath();
         this.context.rect(40, 10, 20, 20);
         this.context.stroke();
-        if (this.pressed[38])
+        if (this.pressed[38] || this.pressed[87])
             this.context.fill();
 
         this.context.beginPath();
         this.context.rect(10, 40, 20, 20);
         this.context.stroke();
-        if (this.pressed[37])
+        if (this.pressed[37] || this.pressed[65])
             this.context.fill();
 
         this.context.beginPath();
         this.context.rect(40, 40, 20, 20);
         this.context.stroke();
-        if (this.pressed[40])
+        if (this.pressed[40] || this.pressed[83])
             this.context.fill();
 
         this.context.beginPath();
         this.context.rect(70, 40, 20, 20);
         this.context.stroke();
-        if (this.pressed[39])
+        if (this.pressed[39] || this.pressed[68])
             this.context.fill();
-        console.log(this.pressed)
     }
 }
